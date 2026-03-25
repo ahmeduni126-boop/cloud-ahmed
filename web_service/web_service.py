@@ -1,7 +1,10 @@
 from flask import Flask, render_template_string, request, redirect
 import requests
+
 app = Flask(__name__)
+
 API_URL = "https://cloud-ahmed-1.onrender.com"
+
 HTML = """
 <!doctype html>
 <html>
@@ -12,9 +15,8 @@ HTML = """
  h1 { color: #333; }
  input { padding: 10px; font-size: 16px; }
  button { padding: 10px 15px; background: #4CAF50; color: white; border: none; 
-border-radius: 6px; cursor: pointer; }
- li { background: white; margin: 5px auto; width: 200px; padding: 8px; border-radius: 
-5px; }
+ border-radius: 6px; cursor: pointer; }
+ li { background: white; margin: 5px auto; width: 200px; padding: 8px; border-radius: 5px; }
  </style>
 </head>
 <body>
@@ -24,6 +26,7 @@ border-radius: 6px; cursor: pointer; }
  <input type="text" name="isim" placeholder="Adını yaz" required>
  <button type="submit">Gönder</button>
  </form>
+
  <h3>Ziyaretçiler:</h3>
  <ul>
  {% for ad in isimler %}
@@ -33,14 +36,19 @@ border-radius: 6px; cursor: pointer; }
 </body>
 </html>
 """
+
 @app.route("/", methods=["GET", "POST"])
 def index():
- if request.method == "POST":
-     isim = request.form.get("isim")
- requests.post(API_URL + "/ziyaretciler", json={"isim": isim})
- return redirect("/")
- resp = requests.get(API_URL + "/ziyaretciler")
- isimler = resp.json() if resp.status_code == 200 else []
- return render_template_string(HTML, isimler=isimler)
+    if request.method == "POST":
+        isim = request.form.get("isim")
+        requests.post(API_URL + "/ziyaretciler", json={"isim": isim})
+        return redirect("/")
+
+    resp = requests.get(API_URL + "/ziyaretciler")
+    isimler = resp.json() if resp.status_code == 200 else []
+
+    return render_template_string(HTML, isimler=isimler)
+
+
 if __name__ == "__main__":
- app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000)
