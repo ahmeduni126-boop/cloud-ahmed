@@ -36,7 +36,7 @@ border-radius: 6px; cursor: pointer; }
 @app.route("/", methods=["GET", "POST"])
 def index():
  if request.method == "POST":
- isim = request.form.get("isim")
+     isim = request.form.get("isim")
  requests.post(API_URL + "/ziyaretciler", json={"isim": isim})
  return redirect("/")
  resp = requests.get(API_URL + "/ziyaretciler")
