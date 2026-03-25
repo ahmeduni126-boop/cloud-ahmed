@@ -5,7 +5,7 @@ app = Flask(__name__)
 CORS(app)
 DATABASE_URL = os.getenv(
  "DATABASE_URL",
- "postgresql://volkan:201eAcwsVd7cf1jyxQL2F1wn4VZ3FSbW@dpg￾d3t90iur433s73b5q070-a.oregon-postgres.render.com/cloud_db_gwjr"
+ "postgresql://ahmed:KGVZ993ik5EQMpIMAWbmpvh9XZuyX0xI@dpg-d6t8rhq4d50c73c5c7sg-a.oregon-postgres.render.com/hello_cloud3_db_5dbw"
 )
 def connect_db():
  return psycopg2.connect(DATABASE_URL)
